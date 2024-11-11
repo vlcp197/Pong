@@ -9,7 +9,7 @@ namespace Pong
         private GraphicsDeviceManager _graphics;
         Paddle paddle;
         Paddle paddle2;
-
+        Ball ball;
 
 
         public Game1()
@@ -25,6 +25,7 @@ namespace Pong
         {
             paddle = new Paddle(false);
             paddle2 = new Paddle(true);
+            ball = new Ball();
             base.Initialize();
         }
 
@@ -47,6 +48,7 @@ namespace Pong
 
             paddle.Update(gameTime);
             paddle2.Update(gameTime);
+            ball.Update(gameTime, paddle, paddle2);
             base.Update(gameTime);
 
 
@@ -60,6 +62,7 @@ namespace Pong
 
             paddle.Draw();
             paddle2.Draw();
+            ball.Draw();
 
             Globals.spriteBatch.End();
 
