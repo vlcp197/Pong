@@ -9,5 +9,7 @@ namespace Pong
         public static int WIDTH = 640;
         public static int HEIGHT = 480;
         public static Texture2D pixel;
+        public static int player1_score;
+        public static int player2_score;
     }
 }
