@@ -7,25 +7,33 @@ namespace Pong
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        Paddle paddle;
+        Paddle paddle2;
+
+
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
+            _graphics.PreferredBackBufferWidth = Globals.WIDTH;
+            _graphics.PreferredBackBufferHeight = Globals.HEIGHT;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            paddle = new Paddle(false);
+            paddle2 = new Paddle(true);
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            Globals.pixel = new Texture2D(GraphicsDevice, 1, 1);
+            Globals.pixel.SetData<Color>(new Color[] { Color.White });
 
             // TODO: use this.Content to load your game content here
         }
@@ -37,16 +45,27 @@ namespace Pong
 
             // TODO: Add your update logic here
 
+            paddle.Update(gameTime);
+            paddle2.Update(gameTime);
             base.Update(gameTime);
+
+
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
+            Globals.spriteBatch.Begin();
+
+            paddle.Draw();
+            paddle2.Draw();
+
+            Globals.spriteBatch.End();
+
 
             base.Draw(gameTime);
+
         }
     }
 }
